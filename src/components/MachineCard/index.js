@@ -65,7 +65,7 @@ const MachineCard = ({
                 value={machine[field.name]}
                 label={field.name}
                 // eslint-disable-next-line react/jsx-props-no-spreading
-                renderInput={(params) => <TextField {...params} />}
+                renderInput={(params) => <TextField {...params} fullWidth />}
                 onChange={(value) => {
                   handleUpdate(field.name, value);
                 }}
