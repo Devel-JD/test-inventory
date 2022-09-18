@@ -3,9 +3,11 @@ import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 
 import machineTypeReducer from 'src/features/machine-type/machineTypeSlice';
+import machineReducer from 'src/features/machine/machineSlice';
 
 const rootReducer = combineReducers({
   machineTypes: machineTypeReducer,
+  machines: machineReducer,
 });
 
 const persistConfig = {

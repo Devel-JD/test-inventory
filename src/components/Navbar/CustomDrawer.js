@@ -8,6 +8,7 @@ import {
   ListItemButton,
   ListItemText,
 } from '@mui/material';
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
 const CustomDrawer = ({
@@ -17,6 +18,8 @@ const CustomDrawer = ({
   activeNavLink,
   normalNavLink,
 }) => {
+  const machineTypes = useSelector((state) => state.machineTypes);
+
   return (
     <Drawer
       variant="temporary"
@@ -35,7 +38,6 @@ const CustomDrawer = ({
         </Typography>
         <Divider />
         <List>
-          {/* {navItems.map((item) => ( */}
           <ListItem disablePadding>
             <ListItemButton
               component={NavLink}
@@ -46,6 +48,18 @@ const CustomDrawer = ({
               <ListItemText primary="All Machines" />
             </ListItemButton>
           </ListItem>
+          {machineTypes.map((machineType, index) => (
+            <ListItem disablePadding key={machineType.id}>
+              <ListItemButton
+                component={NavLink}
+                to={`/machine/${index}`}
+                style={({ isActive }) => (isActive ? activeNavLink : normalNavLink)}
+                sx={{ textAlign: 'center', color: 'black' }}
+                end>
+                <ListItemText primary={machineType.name} />
+              </ListItemButton>
+            </ListItem>
+          ))}
           <ListItem disablePadding>
             <ListItemButton
               component={NavLink}
@@ -55,7 +69,6 @@ const CustomDrawer = ({
               <ListItemText primary="Machine Type" />
             </ListItemButton>
           </ListItem>
-          {/* ))} */}
         </List>
       </Box>
     </Drawer>
