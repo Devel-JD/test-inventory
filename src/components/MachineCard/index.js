@@ -8,9 +8,17 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 import CustomPaper from '../CustomPaper';
 
-const MachineCard = ({ machine, handleRemoveMachine, handleUpdateMachine, fields, index }) => {
+const MachineCard = ({
+  machineTypeId,
+  machine,
+  handleRemoveMachine,
+  handleUpdateMachine,
+  fields,
+  fieldForTitle,
+  index,
+}) => {
   const handleUpdate = (name, value) => {
-    handleUpdateMachine(index, { [name]: value });
+    handleUpdateMachine(machineTypeId, index, { [name]: value });
   };
 
   const generateFields = () =>
@@ -21,7 +29,7 @@ const MachineCard = ({ machine, handleRemoveMachine, handleUpdateMachine, fields
           element = (
             <TextField
               name={field.name}
-              value={machine[field.name]}
+              defaultValue={machine[field.name]}
               label={field.name}
               fullWidth
               onChange={(e) => handleUpdate(e.target.name, e.target.value)}
@@ -41,11 +49,11 @@ const MachineCard = ({ machine, handleRemoveMachine, handleUpdateMachine, fields
           element = (
             <TextField
               name={field.name}
-              value={machine[field.name]}
+              defaultValue={machine[field.name]}
               type="number"
               label={field.name}
               fullWidth
-              onChange={handleUpdate}
+              onChange={(e) => handleUpdate(e.target.name, e.target.value)}
             />
           );
           break;
@@ -78,9 +86,9 @@ const MachineCard = ({ machine, handleRemoveMachine, handleUpdateMachine, fields
   return (
     <CustomPaper>
       <Grid container alignItems="center">
-        <Grid item>{machine?.name || 'Untitled'}</Grid>
+        <Grid item>{machine[fieldForTitle]?.toLocaleString() || 'Untitled'}</Grid>
         <Grid item>
-          <IconButton color="error" onClick={() => handleRemoveMachine(index)}>
+          <IconButton color="error" onClick={() => handleRemoveMachine(machineTypeId, index)}>
             <DeleteOutlined />
           </IconButton>
         </Grid>

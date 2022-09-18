@@ -14,7 +14,6 @@ export const machineSlice = createSlice({
       state[action.payload.machineTypeId].splice(action.payload.index, 1);
     },
     update: (state, action) => {
-      console.log('hello', action);
       state[action.payload.machineTypeId][action.payload.index] = {
         ...state[action.payload.machineTypeId][action.payload.index],
         ...action.payload.data,

@@ -15,15 +15,12 @@ const Machine = () => {
     dispatch(MachineActions.add(machineTypes[id].id));
   };
 
-  const handleRemoveMachine = (machineIndex) => {
-    dispatch(MachineActions.remove({ machineTypeId: machineTypes[id].id, index: machineIndex }));
+  const handleRemoveMachine = (machineTypeId, machineIndex) => {
+    dispatch(MachineActions.remove({ machineTypeId, index: machineIndex }));
   };
 
-  const handleUpdateMachine = (machineIndex, data) => {
-    console.log(machineIndex, 'machineIndex');
-    dispatch(
-      MachineActions.update({ machineTypeId: machineTypes[id].id, index: machineIndex, data }),
-    );
+  const handleUpdateMachine = (machineTypeId, machineIndex, data) => {
+    dispatch(MachineActions.update({ machineTypeId, index: machineIndex, data }));
   };
 
   const generateMachineCard = () =>
@@ -31,6 +28,8 @@ const Machine = () => {
       <Grid item xs={12} sm={6} md={3} key={machine.id}>
         <MachineCard
           machine={machine}
+          fieldForTitle={machineTypes[id].fieldForTitle}
+          machineTypeId={machineTypes[id].id}
           fields={machineTypes[id].fields}
           handleRemoveMachine={handleRemoveMachine}
           handleUpdateMachine={handleUpdateMachine}
